@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -16,3 +18,14 @@ class PublisherNode(Node):
         self.publisher_.publish(msg)
         self.get_logger().info(f'Publishing: "{msg.data}"')
         self.count = self.count - 1 if self.count > 0 else 100
+
+
+def main():
+    rclpy.init()
+    publisher_node = PublisherNode()
+    rclpy.spin(publisher_node)
+    publisher_node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == "__main__":
+    main()
